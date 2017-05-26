@@ -1,1 +1,1 @@
-py-processors==3.0.3
+-e git://github.com/myedibleenso/py-processors.git#egg=py-processors
