@@ -1,10 +1,15 @@
 # odin-tutorial
-An interactive introduction to the Odin information extraction system
-
+This project provides an interactive introduction to the Odin information extraction system, including some example domains.
 
 # Requirements
 
-You'll need Java 8, python, and the package listed in `requirements.txt`.
+## Client
+You'll need python and the package listed in `requirements.txt`.  
+
+## Server
+Additionally, the NLP server requires either 1) `java 8` or 2) `docker`.  
+
+For detailed instructions on starting and running the NLP server, [see this section of the documentation for `py-processors`](http://py-processors.readthedocs.io/en/latest/example.html#running-the-nlp-server).
 
 ## Setting up your python environment
 
