@@ -11726,9 +11726,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11749,7 +11747,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11791,7 +11789,9 @@ div#notebook {
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[1]:</div>
+
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -11828,10 +11828,12 @@ div.text_cell_render {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
 
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3.0.3
+<pre>3.2.1
 </pre>
 </div>
 </div>
@@ -11846,6 +11848,7 @@ div.text_cell_render {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">processors</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">processors.visualization</span> <span class="k">import</span> <span class="n">JupyterVisualizer</span> <span class="k">as</span> <span class="n">viz</span>
 
 <span class="n">API</span> <span class="o">=</span> <span class="n">ProcessorsAPI</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8881</span><span class="p">,</span> <span class="n">keep_alive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -11859,12 +11862,27 @@ div.text_cell_render {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
 
+
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>INFO - Using path given via $PROCESSORS_SERVER
-INFO - Connection with server established!
-INFO - Server version meets recommendations (v3.0.2)
+<pre>INFO - Starting processors-server (java -Xmx3G -cp /Users/gus/anaconda3/lib/python3.5/site-packages/processors/processors-server.jar NLPServer --port 8881 --host localhost) ...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Waiting for server...
+[============                                                ]
+
+Connection with processors-server established (http://localhost:8881)
 </pre>
 </div>
 </div>
@@ -11873,12 +11891,102 @@ INFO - Server version meets recommendations (v3.0.2)
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Rule-based-information-extraction-with-Odin">Rule-based information extraction with Odin<a class="anchor-link" href="#Rule-based-information-extraction-with-Odin">&#182;</a></h1><p>The Odin manual can be found here: <a href="https://arxiv.org/abs/1509.07513">https://arxiv.org/abs/1509.07513</a></p>
+<h1 id="Rule-based-information-extraction-with-Odin">Rule-based information extraction with Odin<a class="anchor-link" href="#Rule-based-information-extraction-with-Odin">&#182;</a></h1><p>This tutorial provides an introduction to Odin, a domain-independent rule-based system for information extraction.</p>
+<h1 id="Why-Odin?">Why Odin?<a class="anchor-link" href="#Why-Odin?">&#182;</a></h1><ul>
+<li>Supports patterns over directed graphs, such as syntactic dependency parses<ul>
+<li>Good generalizability</li>
+</ul>
+</li>
+<li>Supports patterns over sequences of tokens and their attributes</li>
+<li>Supports rule templates and variables</li>
+<li>It was designed to be domain independent</li>
+<li>Rules can be scaffolded and applied in cascades<ul>
+<li>The output of one rule can be the input to another rule)</li>
+</ul>
+</li>
+<li>Odin is <a href="https://github.com/clulab/processors">open source</a>, under active development, and it even has a <a href="https://arxiv.org/abs/1509.07513">manual</a></li>
+<li>You can use it natively from within the JVM (it was written in Scalal) or in <a href="https://github.com/myedibleenso/py-processors">Python</a> using a <a href="https://github.com/myedibleenso/processors-server">client-server architecture</a></li>
+<li>Rules are written using <code>YAML</code> and familiar constructs</li>
+</ul>
+<h2 id="Useful-resources-for-learning-Odin">Useful resources for learning Odin<a class="anchor-link" href="#Useful-resources-for-learning-Odin">&#182;</a></h2><ul>
+<li><a href="https://arxiv.org/abs/1509.07513">The Odin manual</a></li>
+<li><a href="http://aclanthology.info/papers/a-domain-independent-rule-based-framework-for-event-extraction"><em>A Domain-independent Rule-based Framework for Event Extraction</em></a></li>
+<li><a href="http://www.lrec-conf.org/proceedings/lrec2016/pdf/32_Paper.pdf"><em>Odin’s Runes: A Rule Language for Information Extraction</em></a></li>
+</ul>
+<h2 id="Projects-using-Odin">Projects using Odin<a class="anchor-link" href="#Projects-using-Odin">&#182;</a></h2><ul>
+<li><a href="https://github.com/clulab/reach/blob/master/README.md">Reach</a>, a machine reading system for biomedical publications developed for <a href="http://www.darpa.mil/program/big-mechanism">DARPA's Big Mechanism program</a></li>
+<li><a href="http://www.nejm.org/doi/full/10.1056/NEJMp1605441#t=article">The Bill and Melinda Gates Foundation's Healthy Birth, Growth, and Development Knowledge Initiative (HBGDKi)</a></li>
+<li><a href="https://researchportal.rutgers.edu/node/323">A seedling project for DARPA's World Modelers program</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prerequisites">Prerequisites<a class="anchor-link" href="#Prerequisites">&#182;</a></h2><p>This tutorial assumes that you have some familiarity with regular expresssions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Odin operates over <strong>documents</strong> which have been tokenized, sentence-segmented, parsed, and annotated via an NLP pipeline for part-of-speech (PoS) tags, lemmas, and named entities.</p>
+<p><strong>Rules</strong> matched against these annotated documents produce <strong>mentions</strong> of entities, relations, or events that can then be reused to write more complicated rules (ex. entities $\rightarrow$ events $\rightarrow$ events involving other events).</p>
+<p>These <strong>rules</strong> are written in a simple subset of <code>YAML</code> and can describe sequences of tokens or traversals over syntactic dependency parse. Luckily, you don't need to be an expert in <code>YAML</code> in order to write Odin rules.</p>
+<p>All rules have the following fields:</p>
+<table>
+<thead><tr>
+<th style="text-align:center">Field</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>name</code></td>
+<td style="text-align:left">the name of the specific rule.  When a rule matches, the match (Mention) stores the value of this field in its <code>.foundBy</code> attribute.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>label</code></td>
+<td style="text-align:left">What a rule's match represents (<code>Person</code>, <code>Location</code>, <code>Phosphorylation</code>, etc.).</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>type</code></td>
+<td style="text-align:left">Currently, two primary rule types <code>token</code> or <code>dependency</code>.  <code>token</code> refers to a surface pattern or sequence of tokens.  <code>dependency</code> refers to a pattern over a graph (syntactic dependency parse).</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>pattern</code></td>
+<td style="text-align:left">Specified as multi-line string using the vertical bar character (e.g. &#124; )</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Notes-on-YAML">Notes on <code>YAML</code><a class="anchor-link" href="#Notes-on-YAML">&#182;</a></h2><p>It's useful to keep in mind that <code>YAML</code> strings don’t have to be quoted. This is a nice feature that allows one to write
+shorter and cleaner rules. However, there is one exception that you should be aware of: strings that
+start with a YAML indicator character must be quoted. Indicator characters have special semantics
+and must be quoted if they should be interpreted as part of a string. These are all the valid <code>YAML</code>
+indicator characters:</p>
+
+<pre><code>- ? : , [ ] { } # &amp; * ! | &gt; ’ " % @ ‘</code></pre>
+<p>As you can probably tell, these are not characters that occur frequently in practice. Usually names
+and labels are composed of alphanumeric characters and the occasional underscore, so, most of the
+time, you can get away without quoting strings.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Outcome">Outcome<a class="anchor-link" href="#Outcome">&#182;</a></h1><p>By the end of this tutorial, you will understand how to interpret and modify the following grammar:</p>
 
 </div>
 </div>
@@ -11888,11 +11996,77 @@ INFO - Server version meets recommendations (v3.0.2)
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;Julia-Louis Dreyfus and Brad Hall were married in June of 1987.&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">processors.visualization</span> <span class="k">import</span> <span class="n">JupyterVisualizer</span> <span class="k">as</span> <span class="n">viz</span>
+<span class="s2">taxonomy:</span>
+<span class="s2">  - Entity:</span>
+<span class="s2">    - ProperNoun</span>
+<span class="s2">    - Organization</span>
+<span class="s2">    - PossiblePerson:</span>
+<span class="s2">      - Person</span>
+<span class="s2">    - Location</span>
+<span class="s2">  - Date</span>
+<span class="s2">  - HasX:</span>
+<span class="s2">    - HasTitle</span>
+<span class="s2">  - Event:</span>
+<span class="s2">    - Missing</span>
 
-<span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">example_doc</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="s2">rules:</span>
+<span class="s2">  - name: &quot;ner-location&quot;</span>
+<span class="s2">    label: Location</span>
+<span class="s2">    priority: 1</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [entity=&quot;LOCATION&quot;]+ | </span>
+<span class="s2">      Twin Peaks</span>
+
+<span class="s2">  - name: &quot;ner-person&quot;</span>
+<span class="s2">    label: Person</span>
+<span class="s2">    priority: 1</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">     [entity=&quot;PERSON&quot;]+</span>
+
+<span class="s2">  - name: &quot;ner-org&quot;</span>
+<span class="s2">    label: Organization</span>
+<span class="s2">    priority: 1</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [entity=&quot;ORGANIZATION&quot;]+</span>
+
+<span class="s2">  - name: &quot;ner-date&quot;</span>
+<span class="s2">    label: Date</span>
+<span class="s2">    priority: 1</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [entity=&quot;DATE&quot;]+</span>
+
+<span class="s2">  - name: &quot;proper-noun&quot;</span>
+<span class="s2">    label: ProperNoun</span>
+<span class="s2">    priority: 2</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [word=/^[A-Z]/ &amp; tag=/^(JJ|NN)/ &amp; !mention=Person]+ |</span>
+<span class="s2">      [tag=/^NNP/]+</span>
+
+<span class="s2">  - name: &quot;has-title&quot;</span>
+<span class="s2">    label: HasTitle</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      person: Person</span>
+<span class="s2">      title: ProperNoun = nn [!mention=Person]</span>
+
+<span class="s2">  - name: &quot;missing&quot;</span>
+<span class="s2">    label: Missing</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      trigger = [lemma=go] missing</span>
+<span class="s2">      theme: Person = &lt;xcomp nsubj</span>
+<span class="s2">      date: Date? = prep_on</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_text</span><span class="p">(</span><span class="s2">&quot;FBI Special Agent Dale Cooper went missing on June 10, 1991.  He was last seen in the woods of Twin Peaks. &quot;</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">mentions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sentenceObj</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11904,7 +12078,609 @@ INFO - Server version meets recommendations (v3.0.2)
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">He was last seen in the woods of <span class="mention-span sentence"><sub class="mention-label">Location</sub>Twin Peaks</span> .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">He was last seen in the woods of <span class="mention-span sentence"><sub class="mention-label">ProperNoun</sub>Twin Peaks</span> .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">ProperNoun</sub>FBI Special Agent</span> Dale Cooper went missing on June 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">HasTitle</sub><span class="mention-arg mention-span sentence"><sub class="mention-label">ProperNoun</sub>FBI Special Agent<sup class="mention-role">title</sup></span> <span class="mention-arg mention-span sentence"><sub class="mention-label">Person</sub>Dale Cooper<sup class="mention-role">person</sup></span></span> went missing on June 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Organization</sub>FBI</span> Special Agent Dale Cooper went missing on June 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent Dale Cooper went missing on <span class="mention-span sentence"><sub class="mention-label">Date</sub>June 10 , 1991</span> .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent <span class="mention-span sentence"><sub class="mention-label">Missing</sub><span class="mention-arg mention-span sentence"><sub class="mention-label">Person</sub>Dale Cooper<sup class="mention-role">theme</sup></span> <span class="mention-trigger mention-span sentence">went missing<sup class="mention-role">TRIGGER</sup></span> on <span class="mention-arg mention-span sentence"><sub class="mention-label">Date</sub>June 10 , 1991<sup class="mention-role">date</sup></span></span> .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent <span class="mention-span sentence"><sub class="mention-label">Person</sub>Dale Cooper</span> went missing on June 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent <span class="mention-span sentence"><sub class="mention-label">ProperNoun</sub>Dale Cooper</span> went missing on June 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent Dale Cooper went missing on <span class="mention-span sentence"><sub class="mention-label">ProperNoun</sub>June</span> 10 , 1991 .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -12226,33 +13002,35 @@ class displaCyProcessors {
 
   var visualizer = new displaCyProcessors({
       container: "#graph_0",
-      distance: 113,
+      distance: 110,
       offsetX: 100
   });
   var sent = {
     "endOffsets": [
+        3,
         11,
-        19,
-        23,
-        28,
-        33,
-        38,
-        46,
-        49,
+        17,
+        22,
+        29,
+        34,
+        42,
+        45,
+        50,
+        53,
         54,
-        57,
-        62,
-        63
+        59,
+        60
     ],
     "entities": [
+        "ORGANIZATION",
+        "O",
+        "O",
         "PERSON",
         "PERSON",
         "O",
-        "PERSON",
-        "PERSON",
         "O",
         "O",
-        "O",
+        "DATE",
         "DATE",
         "DATE",
         "DATE",
@@ -12264,17 +13042,17 @@ class displaCyProcessors {
                 {
                     "destination": 0,
                     "relation": "nn",
-                    "source": 1
+                    "source": 4
+                },
+                {
+                    "destination": 1,
+                    "relation": "amod",
+                    "source": 4
                 },
                 {
                     "destination": 2,
-                    "relation": "cc",
-                    "source": 1
-                },
-                {
-                    "destination": 4,
-                    "relation": "conj",
-                    "source": 1
+                    "relation": "nn",
+                    "source": 4
                 },
                 {
                     "destination": 3,
@@ -12282,23 +13060,23 @@ class displaCyProcessors {
                     "source": 4
                 },
                 {
-                    "destination": 1,
-                    "relation": "nsubjpass",
-                    "source": 6
+                    "destination": 4,
+                    "relation": "nsubj",
+                    "source": 5
                 },
                 {
-                    "destination": 5,
-                    "relation": "auxpass",
-                    "source": 6
+                    "destination": 6,
+                    "relation": "xcomp",
+                    "source": 5
+                },
+                {
+                    "destination": 12,
+                    "relation": "punct",
+                    "source": 5
                 },
                 {
                     "destination": 7,
                     "relation": "prep",
-                    "source": 6
-                },
-                {
-                    "destination": 11,
-                    "relation": "punct",
                     "source": 6
                 },
                 {
@@ -12308,17 +13086,22 @@ class displaCyProcessors {
                 },
                 {
                     "destination": 9,
-                    "relation": "prep",
+                    "relation": "num",
                     "source": 8
                 },
                 {
                     "destination": 10,
-                    "relation": "pobj",
-                    "source": 9
+                    "relation": "punct",
+                    "source": 8
+                },
+                {
+                    "destination": 11,
+                    "relation": "num",
+                    "source": 8
                 }
             ],
             "roots": [
-                6
+                5
             ]
         },
         "stanford-collapsed": {
@@ -12326,12 +13109,17 @@ class displaCyProcessors {
                 {
                     "destination": 0,
                     "relation": "nn",
-                    "source": 1
+                    "source": 4
                 },
                 {
-                    "destination": 4,
-                    "relation": "conj_and",
-                    "source": 1
+                    "destination": 1,
+                    "relation": "amod",
+                    "source": 4
+                },
+                {
+                    "destination": 2,
+                    "relation": "nn",
+                    "source": 4
                 },
                 {
                     "destination": 3,
@@ -12339,95 +13127,104 @@ class displaCyProcessors {
                     "source": 4
                 },
                 {
-                    "destination": 1,
-                    "relation": "nsubjpass",
-                    "source": 6
-                },
-                {
                     "destination": 4,
-                    "relation": "nsubjpass",
-                    "source": 6
+                    "relation": "nsubj",
+                    "source": 5
                 },
                 {
-                    "destination": 5,
-                    "relation": "auxpass",
-                    "source": 6
+                    "destination": 6,
+                    "relation": "xcomp",
+                    "source": 5
+                },
+                {
+                    "destination": 12,
+                    "relation": "punct",
+                    "source": 5
                 },
                 {
                     "destination": 8,
-                    "relation": "prep_in",
+                    "relation": "prep_on",
                     "source": 6
                 },
                 {
-                    "destination": 11,
-                    "relation": "punct",
-                    "source": 6
+                    "destination": 9,
+                    "relation": "num",
+                    "source": 8
                 },
                 {
                     "destination": 10,
-                    "relation": "prep_of",
+                    "relation": "punct",
+                    "source": 8
+                },
+                {
+                    "destination": 11,
+                    "relation": "num",
                     "source": 8
                 }
             ],
             "roots": [
-                6
+                5
             ]
         }
     },
     "lemmas": [
-        "Julia-Louis",
-        "Dreyfus",
-        "and",
-        "Brad",
-        "Hall",
-        "be",
-        "marry",
-        "in",
+        "FBI",
+        "special",
+        "Agent",
+        "Dale",
+        "Cooper",
+        "go",
+        "miss",
+        "on",
         "June",
-        "of",
-        "1987",
+        "10",
+        ",",
+        "1991",
         "."
     ],
     "startOffsets": [
         0,
+        4,
         12,
-        20,
-        24,
-        29,
-        34,
-        39,
-        47,
-        50,
+        18,
+        23,
+        30,
+        35,
+        43,
+        46,
+        51,
+        53,
         55,
-        58,
-        62
+        59
     ],
     "tags": [
         "NNP",
+        "JJ",
         "NNP",
-        "CC",
         "NNP",
         "NNP",
         "VBD",
-        "VBN",
+        "VBG",
         "IN",
         "NNP",
-        "IN",
+        "CD",
+        ",",
         "CD",
         "."
     ],
     "words": [
-        "Julia-Louis",
-        "Dreyfus",
-        "and",
-        "Brad",
-        "Hall",
-        "were",
-        "married",
-        "in",
+        "FBI",
+        "Special",
+        "Agent",
+        "Dale",
+        "Cooper",
+        "went",
+        "missing",
+        "on",
         "June",
-        "of",
-        "1987",
+        "10",
+        ",",
+        "1991",
         "."
     ]
 };
@@ -12447,172 +13244,13 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Capturing-entities">Capturing entities<a class="anchor-link" href="#Capturing-entities">&#182;</a></h1><p>TODO</p>
-<h2 id="Capturing-entities-with-surface-patterns">Capturing entities with surface patterns<a class="anchor-link" href="#Capturing-entities-with-surface-patterns">&#182;</a></h2><p>TODO</p>
-<h2 id="Reusing-mentions-from-an-earlier-rule">Reusing mentions from an earlier rule<a class="anchor-link" href="#Reusing-mentions-from-an-earlier-rule">&#182;</a></h2><p>TODO. Give an example.  Titles?</p>
-<h2 id="Challenge:-chunking-text-(part-2)">Challenge: chunking text (part 2)<a class="anchor-link" href="#Challenge:-chunking-text-(part-2)">&#182;</a></h2><p>Write a rule set that captures this simple phrase structure grammar for linguistic constituents:</p>
-
-<pre><code>Verb -&gt; (by PoS tag)
-Noun -&gt; (by PoS tag)
-Adjective -&gt; (by PoS tag)
-NP -&gt; determiner (by tag) + zero or more Adjective + one or more Noun</code></pre>
-<h2 id="Challenge:-chunking-text-(part-2)">Challenge: chunking text (part 2)<a class="anchor-link" href="#Challenge:-chunking-text-(part-2)">&#182;</a></h2><p>Modify the PSG rules provided in the previous challenge to include one for a verb phrase (VP).  Extend your grammar to cover your <code>VP</code> additions.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Token-contraints">Token contraints<a class="anchor-link" href="#Token-contraints">&#182;</a></h2><table>
-<thead><tr>
-<th style="text-align:center">Field</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>word</code></td>
-<td style="text-align:left">The actual token.</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>lemma</code></td>
-<td style="text-align:left">The lemma form of the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>tag</code></td>
-<td style="text-align:left">The part-of-speech (PoS) tag assigned to the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>incoming</code></td>
-<td style="text-align:left">Incoming relations from the dependency graph for the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>outgoing</code></td>
-<td style="text-align:left">Outgoing relations from the dependency graph for the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>chunk</code></td>
-<td style="text-align:left">The shallow constituent type (ex. NP, VP) immediately containing the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>entity</code></td>
-<td style="text-align:left">The NER label of the token</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>mention</code></td>
-<td style="text-align:left">The label of any Mention(s) (i.e., rule output) that contains the token.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Regex-or-exact">Regex or exact<a class="anchor-link" href="#Regex-or-exact">&#182;</a></h2><p>TODO</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Case-insensitive-patterns">Case-insensitive patterns<a class="anchor-link" href="#Case-insensitive-patterns">&#182;</a></h2><p>TODO</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Combining-token-constraints">Combining token constraints<a class="anchor-link" href="#Combining-token-constraints">&#182;</a></h2><p>TODO</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Challenge:-nouns-with-a-certain-suffix">Challenge: nouns with a certain suffix<a class="anchor-link" href="#Challenge:-nouns-with-a-certain-suffix">&#182;</a></h2><p>TODO</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Negating-token-constraints">Negating token constraints<a class="anchor-link" href="#Negating-token-constraints">&#182;</a></h2><p>TODO</p>
-<p><code>[!fieldname=pattern]</code></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Challenge:-no-verbs!">Challenge: no verbs!<a class="anchor-link" href="#Challenge:-no-verbs!">&#182;</a></h2><p>Using a single token constraint, match all tokens in the following sentence that are not verbs:</p>
-<blockquote><p>If you wish to make an apple pie from scratch, you must first invent the universe.</p>
+<h1 id="Capturing-entities">Capturing entities<a class="anchor-link" href="#Capturing-entities">&#182;</a></h1><p>Before we can write rules to identify relations and events, we must first identify their participants.  We'll refer to these participants as <strong>entities</strong>.</p>
+<p>Consider the following sentence describing a marriage:</p>
+<blockquote><p>Julia-Louis Dreyfus and Brad Hall were married in June of 1987.</p>
 </blockquote>
 
 </div>
@@ -12623,23 +13261,11 @@ NP -&gt; determiner (by tag) + zero or more Adjective + one or more Noun</code><
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;If you wish to make an apple pie from scratch, you must first invent the universe.&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;Julia-Louis Dreyfus and Brad Hall were married in June of 1987.&quot;</span><span class="p">)</span>
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">processors.visualization</span> <span class="k">import</span> <span class="n">JupyterVisualizer</span> <span class="k">as</span> <span class="n">viz</span>
 
-<span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">challenge_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">rules:</span>
-<span class="s2">    - name: &quot;no-verbs&quot;</span>
-<span class="s2">      label: NotVerb</span>
-<span class="s2">      # req. 1: This pattern should involve a single token constraint</span>
-<span class="s2">      # req. 2: The token constraint should use a negated pattern</span>
-<span class="s2">      pattern: | ???</span>
-<span class="s2">&quot;&quot;&quot;</span>
-
-<span class="c1"># mentions = API.odin.extract_from_document(d, challenge_rules)</span>
-<span class="c1"># for m in mentions: print(m)</span>
+<span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">example_doc</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12651,7 +13277,9 @@ NP -&gt; determiner (by tag) + zero or more Adjective + one or more Noun</code><
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -12973,6 +13601,3596 @@ class displaCyProcessors {
 
   var visualizer = new displaCyProcessors({
       container: "#graph_1",
+      distance: 113,
+      offsetX: 100
+  });
+  var sent = {
+    "endOffsets": [
+        11,
+        19,
+        23,
+        28,
+        33,
+        38,
+        46,
+        49,
+        54,
+        57,
+        62,
+        63
+    ],
+    "entities": [
+        "PERSON",
+        "PERSON",
+        "O",
+        "PERSON",
+        "PERSON",
+        "O",
+        "O",
+        "O",
+        "DATE",
+        "DATE",
+        "DATE",
+        "O"
+    ],
+    "graphs": {
+        "stanford-basic": {
+            "edges": [
+                {
+                    "destination": 0,
+                    "relation": "nn",
+                    "source": 1
+                },
+                {
+                    "destination": 2,
+                    "relation": "cc",
+                    "source": 1
+                },
+                {
+                    "destination": 4,
+                    "relation": "conj",
+                    "source": 1
+                },
+                {
+                    "destination": 3,
+                    "relation": "nn",
+                    "source": 4
+                },
+                {
+                    "destination": 1,
+                    "relation": "nsubjpass",
+                    "source": 6
+                },
+                {
+                    "destination": 5,
+                    "relation": "auxpass",
+                    "source": 6
+                },
+                {
+                    "destination": 7,
+                    "relation": "prep",
+                    "source": 6
+                },
+                {
+                    "destination": 11,
+                    "relation": "punct",
+                    "source": 6
+                },
+                {
+                    "destination": 8,
+                    "relation": "pobj",
+                    "source": 7
+                },
+                {
+                    "destination": 9,
+                    "relation": "prep",
+                    "source": 8
+                },
+                {
+                    "destination": 10,
+                    "relation": "pobj",
+                    "source": 9
+                }
+            ],
+            "roots": [
+                6
+            ]
+        },
+        "stanford-collapsed": {
+            "edges": [
+                {
+                    "destination": 0,
+                    "relation": "nn",
+                    "source": 1
+                },
+                {
+                    "destination": 4,
+                    "relation": "conj_and",
+                    "source": 1
+                },
+                {
+                    "destination": 3,
+                    "relation": "nn",
+                    "source": 4
+                },
+                {
+                    "destination": 1,
+                    "relation": "nsubjpass",
+                    "source": 6
+                },
+                {
+                    "destination": 4,
+                    "relation": "nsubjpass",
+                    "source": 6
+                },
+                {
+                    "destination": 5,
+                    "relation": "auxpass",
+                    "source": 6
+                },
+                {
+                    "destination": 8,
+                    "relation": "prep_in",
+                    "source": 6
+                },
+                {
+                    "destination": 11,
+                    "relation": "punct",
+                    "source": 6
+                },
+                {
+                    "destination": 10,
+                    "relation": "prep_of",
+                    "source": 8
+                }
+            ],
+            "roots": [
+                6
+            ]
+        }
+    },
+    "lemmas": [
+        "Julia-Louis",
+        "Dreyfus",
+        "and",
+        "Brad",
+        "Hall",
+        "be",
+        "marry",
+        "in",
+        "June",
+        "of",
+        "1987",
+        "."
+    ],
+    "startOffsets": [
+        0,
+        12,
+        20,
+        24,
+        29,
+        34,
+        39,
+        47,
+        50,
+        55,
+        58,
+        62
+    ],
+    "tags": [
+        "NNP",
+        "NNP",
+        "CC",
+        "NNP",
+        "NNP",
+        "VBD",
+        "VBN",
+        "IN",
+        "NNP",
+        "IN",
+        "CD",
+        "."
+    ],
+    "words": [
+        "Julia-Louis",
+        "Dreyfus",
+        "and",
+        "Brad",
+        "Hall",
+        "were",
+        "married",
+        "in",
+        "June",
+        "of",
+        "1987",
+        "."
+    ]
+};
+  var graph_name = "stanford-collapsed";
+
+  visualizer.render(sent, graph_name)
+  visualizer.exportSVG()
+</script>
+</body>
+</html>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Capturing-entities-with-surface-patterns">Capturing entities with surface patterns<a class="anchor-link" href="#Capturing-entities-with-surface-patterns">&#182;</a></h2><p>A surface pattern is rule that is written in terms of a sequence of tokens.
+The simplest surface pattern is just a sequence of words.  For example, the rule below will match the sequence <em>Special Agent</em> and tag it as being a <code>JobTitle</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules:</span>
+<span class="s2">  - name: &quot;job-title&quot;</span>
+<span class="s2">    label: JobTitle</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      Special Agent</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">tp_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;FBI Special Agent Dale Cooper went missing on June 10, 1991&quot;</span><span class="p">)</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">tp_doc</span><span class="p">,</span> <span class="n">rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI <span class="mention-span sentence"><sub class="mention-label">JobTitle</sub>Special Agent</span> Dale Cooper went missing on June 10 , 1991</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course as we'll see rules can get much more sophisticated than this.  For example, Odin allows you to write your pattern over combinations of <em>token attributes</em> (see the <a href="#Token-constraints">token constraints</a> section for more details).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reusing-mentions-from-an-earlier-rule">Reusing mentions from an earlier rule<a class="anchor-link" href="#Reusing-mentions-from-an-earlier-rule">&#182;</a></h2><p>Much of the power of Odin comes from its ability to scaffold rules.  The output of one rule can be referenced by its <strong>label</strong> in subsequent rules.  This allows us to write compact, powerful grammars.  In a surface pattern, this is done using the syntax <code>@MyLabelHere</code> where <code>MyLabelHere</code> refers to whatever label you wish to reference.  We'll apply this syntax in the example below where we'll build another rule off of the output of <code>JobTitle</code>...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules:</span>
+<span class="s2">  - name: &quot;job-title&quot;</span>
+<span class="s2">    label: JobTitle</span>
+<span class="s2">    # This rule runs in the first pass</span>
+<span class="s2">    # of Odin and never again</span>
+<span class="s2">    priority: 1</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      Special Agent</span>
+<span class="s2">      </span>
+<span class="s2">  - name: &quot;expanded-title&quot;</span>
+<span class="s2">    label: JobTitle</span>
+<span class="s2">    priority: 2</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      FBI @JobTitle</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">tp_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;FBI Special Agent Dale Cooper went missing on June 10, 1991&quot;</span><span class="p">)</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">tp_doc</span><span class="p">,</span> <span class="n">rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">foundBy</span><span class="p">)),</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&#34;job-title&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI <span class="mention-span sentence"><sub class="mention-label">JobTitle</sub>Special Agent</span> Dale Cooper went missing on June 10 , 1991</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&#34;expanded-title&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">JobTitle</sub>FBI Special Agent</span> Dale Cooper went missing on June 10 , 1991</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that we could omit the explicit priority from our second rule, "expanded-title", as it won't successfully match until an <code>@JobTitle</code> is available to reuse.  Limiting the priority here is an efficiency decision in that Odin won't event attempt to match the rule until told to do so.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge:-another-agent">Challenge: another agent<a class="anchor-link" href="#Challenge:-another-agent">&#182;</a></h2><p>Complete the grammar below to match Special Agent Fox Mulder.  Note that you only need to change the rule rule "you-complete-me"</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">challenge_text</span> <span class="o">=</span> <span class="s2">&quot;FBI Special Agent Fox Mulder wants to believe you&#39;re gokking mention reuse.&quot;</span>
+
+<span class="n">challenge_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules:</span>
+<span class="s2">  - name: &quot;job-title&quot;</span>
+<span class="s2">    label: JobTitle</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      Special Agent</span>
+<span class="s2">      </span>
+<span class="s2">  - name: &quot;org&quot;</span>
+<span class="s2">    label: Organization</span>
+<span class="s2">    type: token</span>
+<span class="s2">    # Don&#39;t worry if this rule doesn&#39;t make sense to you just yet.</span>
+<span class="s2">    # This pattern is a peek ahead.  Feel free to rewrite it in a form that is familiar.</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [entity=ORGANIZATION]+</span>
+<span class="s2">      </span>
+<span class="s2">  - name: &quot;star-fox&quot;</span>
+<span class="s2">    label: Person</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      [entity=PERSON]+</span>
+
+<span class="s2">  - name: &quot;you-complete-me&quot;</span>
+<span class="s2">    label: ReallySpecialGuy</span>
+<span class="s2">    type: token</span>
+<span class="s2">    pattern: |</span>
+<span class="s2">      &quot;&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">challenge_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">challenge_text</span><span class="p">)</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">challenge_doc</span><span class="p">,</span> <span class="n">challenge_rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">foundBy</span><span class="p">)),</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&#34;job-title&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI <span class="mention-span sentence"><sub class="mention-label">JobTitle</sub>Special Agent</span> Fox Mulder wants to believe you 're gokking mention reuse .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&#34;org&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Organization</sub>FBI</span> Special Agent Fox Mulder wants to believe you 're gokking mention reuse .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&#34;star-fox&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">FBI Special Agent <span class="mention-span sentence"><sub class="mention-label">Person</sub>Fox Mulder</span> wants to believe you 're gokking mention reuse .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge:-chunking-text-(part-1)">Challenge: chunking text (part 1)<a class="anchor-link" href="#Challenge:-chunking-text-(part-1)">&#182;</a></h2><p>Write a rule set that captures this simple phrase structure grammar for linguistic constituents:</p>
+
+<pre><code>Verb        -&gt;  (identify by PoS tag of terminals)
+Noun        -&gt;  (identify by PoS tag of terminals)
+Adjective   -&gt;  (identify by PoS tag of terminals)
+NP          -&gt;  determiner (by tag) + zero or more Adjective + one or more Noun</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">challenge_psg_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The black dog runs at night. </span>
+<span class="s2">Out of nowhere, the mind comes forth.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">psg_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;verb&quot;</span>
+<span class="s2">      label: Verb</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: ???</span>
+<span class="s2">    </span>
+<span class="s2">    - name: &quot;noun&quot;</span>
+<span class="s2">      label: Noun</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: ???</span>
+<span class="s2">      </span>
+<span class="s2">    - name: &quot;adjective&quot;</span>
+<span class="s2">      label: Adjective</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: ???  </span>
+
+<span class="s2">    - name: &quot;noun-phrase&quot;</span>
+<span class="s2">      label: NP</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: ???  </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">challenge_doc</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">challenge_psg_text</span><span class="p">)</span>
+
+<span class="c1"># mentions = API.odin.extract_from_document(doc=challenge_doc, rules=psg_rules)</span>
+<span class="c1"># for m in mentions: viz.display_mention(m)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge:-chunking-text-(part-2)">Challenge: chunking text (part 2)<a class="anchor-link" href="#Challenge:-chunking-text-(part-2)">&#182;</a></h2><p>Modify the PSG rules provided in the previous challenge to include one for a verb phrase (VP).  Extend your grammar to cover your <code>VP</code> additions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Token-contraints">Token contraints<a class="anchor-link" href="#Token-contraints">&#182;</a></h2><table>
+<thead><tr>
+<th style="text-align:center">Field</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>word</code></td>
+<td style="text-align:left">The actual token.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>lemma</code></td>
+<td style="text-align:left">The lemma form of the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tag</code></td>
+<td style="text-align:left">The part-of-speech (PoS) tag assigned to the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>incoming</code></td>
+<td style="text-align:left">Incoming relations from the dependency graph for the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>outgoing</code></td>
+<td style="text-align:left">Outgoing relations from the dependency graph for the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>chunk</code></td>
+<td style="text-align:left">The shallow constituent type (ex. NP, VP) immediately containing the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>entity</code></td>
+<td style="text-align:left">The NER label of the token</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>mention</code></td>
+<td style="text-align:left">The label of any Mention(s) (i.e., rule output) that contains the token.</td>
+</tr>
+</tbody>
+</table>
+<p>For a more information on PoS tags (<code>tag</code> in the table above), see <a href="https://www.eecis.udel.edu/~vijay/cis889/ie/pos-set.pdf">https://www.eecis.udel.edu/~vijay/cis889/ie/pos-set.pdf</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Disjunctions">Disjunctions<a class="anchor-link" href="#Disjunctions">&#182;</a></h2><p>Disjunctions are specified using <code>|</code>.  Imagine we want to find all adjectives and adverbs in the following snippet from W.H. Auden:</p>
+<blockquote><p>the expensive delicate ship that must have seen<br>
+something amazing, a boy falling out of the sky,<br>
+had somewhere to get to and sailed calmly on.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">the expensive delicate ship that must have seen  </span>
+<span class="s2">something amazing, a boy falling out of the sky,  </span>
+<span class="s2">had somewhere to get to and sailed calmly on.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">example_doc2</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">rules_v1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;disjunction&quot;</span>
+<span class="s2">      label: Example</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        [tag=RB] | [tag=JJ]   </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">rules_v1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive <span class="mention-span sentence"><sub class="mention-label">Example</sub>delicate</span> ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something amazing , a boy falling out of the sky , had <span class="mention-span sentence"><sub class="mention-label">Example</sub>somewhere</span> to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something <span class="mention-span sentence"><sub class="mention-label">Example</sub>amazing</span> , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the <span class="mention-span sentence"><sub class="mention-label">Example</sub>expensive</span> delicate ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed <span class="mention-span sentence"><sub class="mention-label">Example</sub>calmly</span> on .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;disjunction&quot;</span>
+<span class="s2">      label: Example</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        # if it&#39;s easier to read </span>
+<span class="s2">        # we can split the disjunction</span>
+<span class="s2">        # onto two lines</span>
+<span class="s2">        [tag=RB] | </span>
+<span class="s2">        [tag=JJ]   </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">rules_v2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive <span class="mention-span sentence"><sub class="mention-label">Example</sub>delicate</span> ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something amazing , a boy falling out of the sky , had <span class="mention-span sentence"><sub class="mention-label">Example</sub>somewhere</span> to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something <span class="mention-span sentence"><sub class="mention-label">Example</sub>amazing</span> , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the <span class="mention-span sentence"><sub class="mention-label">Example</sub>expensive</span> delicate ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed calmly on .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">the expensive delicate ship that must have seen something amazing , a boy falling out of the sky , had somewhere to get to and sailed <span class="mention-span sentence"><sub class="mention-label">Example</sub>calmly</span> on .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can blame the inclusion of this instance of <strong>somewhere</strong> on the PoS tagger.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exact-or-regex">Exact or regex<a class="anchor-link" href="#Exact-or-regex">&#182;</a></h2><p>Patterns may involve an exact string or use regular expressions (Java-flavored).  Imagine we want to identify all syntactic subjects in the following text:</p>
+<blockquote><p>Hamlet killed Claudius.  Rosencrantz and Guildenstern were both killed by Hamlet.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Hamlet killed Claudius.  Rosencrantz and Guildenstern were executed.&quot;</span>
+
+<span class="n">example_doc2</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s look at the syntactic dependency parse for each sentence</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">example_doc2</span><span class="o">.</span><span class="n">sentences</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<html>
+<head>
+  <style>
+    
+  </style>
+</head>
+<body>
+<div id="graph_2">
+</div>
+
+<script type="text/javascript">
+  //- ----------------------------------
+//- DISPLACY PROCESSORS
+//- Based on DisplaCy:
+//- ----------------------------------
+
+
+
+'use strict';
+
+class displaCyProcessors {
+    constructor (options) {
+
+        this.container = document.querySelector(options.container);
+
+        this.$ = document.querySelector.bind(document);
+
+        this.onStart = options.onStart || false;
+        this.onSuccess = options.onSuccess || false;
+        this.onError = options.onError || false;
+
+        this.distance = options.distance || 200;
+        this.offsetX = options.offsetX || 50;
+        this.arrowSpacing = options.arrowSpacing || 20;
+        this.arrowWidth = options.arrowWidth || 10;
+        this.arrowStroke = options.arrowStroke || 2;
+        this.wordSpacing = options.wordSpacing || 75;
+        this.font = options.font || 'inherit';
+        this.color = options.color || '#000000';
+        this.bg = options.bg || '#ffffff';
+    }
+
+    exportSVG() {
+      // http://stackoverflow.com/a/38481556
+      const parseStyles = function(svg) {
+        const styleSheets = [];
+        // get the stylesheets of the document (ownerDocument in case svg is in <iframe> or <object>)
+        const docStyles = svg.ownerDocument.styleSheets;
+
+        // transform the live StyleSheetList to an array to avoid endless loop
+        for (var i = 0; i < docStyles.length; i++) {
+          styleSheets.push(docStyles[i]);
+        }
+
+        if (!styleSheets.length) {
+          return;
+        }
+
+        const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        if (!defs.parentNode) { svg.insertBefore(defs, svg.firstElementChild); }
+        svg.matches = svg.matches || svg.webkitMatchesSelector || svg.mozMatchesSelector || svg.msMatchesSelector || svg.oMatchesSelector;
+
+        // iterate through all document's stylesheets
+        for (var i = 0; i < styleSheets.length; i++) {
+          var currentStyle = styleSheets[i]
+
+          try {
+            var rules = currentStyle.cssRules;
+          } catch (e) {
+            continue;
+          }
+          // create a new style element
+          const style = document.createElement('style');
+          // some stylesheets can't be accessed and will throw a security error
+          const l = rules && rules.length;
+          // iterate through each cssRules of this stylesheet
+          for (var j = 0; j < l; j++) {
+            // get the selector of this cssRules
+            const selector = rules[j].selectorText;
+            // probably an external stylesheet we can't access
+            if (!selector) {
+              continue;
+            }
+
+            // is it our svg node or one of its children ?
+            if ((svg.matches && svg.matches(selector)) || svg.querySelector(selector)) {
+
+              var cssText = rules[j].cssText;
+              // append it to our <style> node
+              style.innerHTML += cssText + '\n';
+            }
+          }
+          // if we got some rules
+          // append the style node to the clone's defs
+          if (style.innerHTML) { defs.appendChild(style); }
+        }
+      }
+
+      var svg = this.$("#" + this.getSVGname())
+      // first create a clone of our svg node so we don't mess the original one
+      var clone = svg.cloneNode(true);
+      // parse the styles
+      parseStyles(clone);
+      // create a doctype
+      var svgDocType = document.implementation.createDocumentType('svg', "-//W3C//DTD SVG 1.1//EN", "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
+      // a fresh svg document
+      var svgDoc = document.implementation.createDocument('http://www.w3.org/2000/svg', 'svg', svgDocType);
+      // replace the documentElement with our clone
+      svgDoc.replaceChild(clone, svgDoc.documentElement);
+      // get the data
+      var svgData = (new XMLSerializer()).serializeToString(svgDoc);
+
+      var a = document.createElement('a');
+      a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
+      a.download = 'graph.svg';
+      a.innerHTML = '<br>save to file';
+      this.container.appendChild(a);
+    }
+
+    handleParsedSentence(sentence, graphName = "stanford-collapsed") {
+        return ({
+          words: sentence.words.map((w, i) => ({
+            text: sentence.words[i],
+            tag: sentence.tags[i],
+            lemma: sentence.lemmas[i],
+            entity: sentence.entities[i]
+            // data: [
+            //   ["lemmas", sentence.lemmas[i]],
+            //   ["entities", sentence.entities[i]]
+            // ]
+          })),
+          // conversions are to ensure edge label is properly rotated
+          arcs: sentence.graphs[graphName].edges.map(({ relation: rel, source: src, destination: dest}, i) => ({
+              label: rel,
+              start: Math.min(dest, src),
+              end: Math.max(dest, src),
+              dir: ((src > dest) ? 'left' : 'right')
+          }))
+        })
+    }
+    getSVGname() {return this.container.id + '-svg'; }
+    render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
+        const parse = this.handleParsedSentence(sentence, graphName = graphName);
+        this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
+        // starting node for most distant dependency
+        // (note that disregard for sign means )
+        this.highestLevel = this.levels.indexOf(this.levels.slice(-1)[0]) + 1;
+        this.offsetY = this.distance / 2 * this.highestLevel;
+
+        const width = this.offsetX + parse.words.length * this.distance;
+        const height = this.offsetY + 3 * this.wordSpacing;
+
+        this.container.innerHTML = '';
+        this.container.appendChild(this._el('svg', {
+            id: this.getSVGname(),
+            classnames: [ 'displacy' ],
+            attributes: [
+                [ 'width', width ],
+                [ 'height', height ],
+                [ 'viewBox', `0 0 ${width} ${height}`],
+                [ 'preserveAspectRatio', 'xMinYMax meet' ],
+                [ 'data-format', this.format ]
+            ],
+            style: [
+                [ 'color', settings.color || this.color ],
+                [ 'background', settings.bg || this.bg ],
+                [ 'fontFamily', settings.font || this.font ]
+            ],
+            children: [
+                ...this.renderWords(parse.words),
+                ...this.renderArrows(parse.arcs)
+            ]
+        }));
+    }
+
+    renderWords(words) {
+        return (words.map(( { text, tag, lemma, entity, data = [] }, i) => this._el('text', {
+            classnames: [ 'displacy-token' ],
+            attributes: [
+                ['fill', 'currentColor'],
+                ['data-tag', text],
+                ['text-anchor', 'middle'],
+                ['y', this.offsetY + this.wordSpacing],
+                ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+            ],
+            children: [
+                this._el('tspan', {
+                    classnames: [ 'displacy-word' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '-1em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', text]
+                    ],
+                    text: text
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-tag' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', tag]
+                    ],
+                    text: tag
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-lemma' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', lemma]
+                    ],
+                    text: lemma
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-entity' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', entity]
+                    ],
+                    text: entity
+                })
+            ]
+        })));
+    }
+
+    renderArrows(arcs) {
+        return arcs.map(({ label, end, start, dir, data = [] }, i) => {
+            const level = this.levels.indexOf(end - start) + 1;
+            const startX = this.offsetX + start * this.distance + this.arrowSpacing * (this.highestLevel - level) / 4;
+            const startY = this.offsetY;
+            const endpoint = this.offsetX + (end - start) * this.distance + start * this.distance - this.arrowSpacing * (this.highestLevel - level) / 4;
+
+            let curve = this.offsetY - level * this.distance / 2;
+            if(curve == 0 && this.levels.length > 5) curve = -this.distance;
+
+            return this._el('g', {
+                id: 'edge-' + i + "-" + this.container.id,
+                classnames: [ 'displacy-arrow' ],
+                attributes: [
+                    [ 'data-dir', dir ],
+                    [ 'data-label', label ],
+                    ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+                ],
+                // NOTE: 'arrow' id must correspond to xlink referenced in 'textPath'
+                // in order to render sequential visualizations correctly in a jupyter notebook (distinct divs aren't enough)
+                children:  [
+                    this._el('path', {
+                        id: 'arrow-' + i + "-" + this.container.id,
+                        classnames: [ 'displacy-arc' ],
+                        attributes: [
+                            [ 'd', `M${startX},${startY} C${startX},${curve} ${endpoint},${curve} ${endpoint},${startY}`],
+                            [ 'stroke-width', this.arrowStroke + 'px' ],
+                            [ 'fill', 'none' ],
+                            [ 'stroke', 'currentColor' ],
+                            [ 'data-dir', dir ],
+                            [ 'data-label', label ]
+                        ]
+                    }),
+
+                    this._el('text', {
+                        attributes: [
+                            [ 'dy', '1em' ]
+                        ],
+                        children: [
+                            this._el('textPath', {
+                                xlink: '#arrow-' + i + "-" + this.container.id,
+                                classnames: [ 'displacy-label' ],
+                                attributes: [
+                                    [ 'startOffset', '50%' ],
+                                    [ 'fill', 'currentColor' ],
+                                    [ 'text-anchor', 'middle' ],
+                                    [ 'data-label', label ],
+                                    [ 'data-dir', dir ]
+                                ],
+                                text: label
+                            })
+                        ]
+                    }),
+
+                    this._el('path', {
+                        classnames: [ 'displacy-arrowhead' ],
+                        attributes: [
+                            [ 'd', `M${(dir == 'left') ? startX : endpoint},${startY + 2} L${(dir == 'left') ? startX - this.arrowWidth + 2 : endpoint + this.arrowWidth - 2},${startY - this.arrowWidth} ${(dir == 'left') ? startX + this.arrowWidth - 2 : endpoint - this.arrowWidth + 2},${startY - this.arrowWidth}` ],
+                            [ 'fill', 'currentColor' ],
+                            [ 'data-label', label ],
+                            [ 'data-dir', dir ]
+                        ]
+                    })
+                ]
+            });
+        });
+    }
+
+    _el(tag, options) {
+        const { classnames = [], attributes = [], style = [], children = [], text, id, xlink } = options;
+        const ns = 'http://www.w3.org/2000/svg';
+        const nsx = 'http://www.w3.org/1999/xlink';
+        const el = document.createElementNS(ns, tag);
+
+        classnames.forEach(name => el.classList.add(name));
+        attributes.forEach(([attr, value]) => el.setAttribute(attr, value));
+        style.forEach(([ prop, value ]) => el.style[prop] = value);
+        if(xlink) el.setAttributeNS(nsx, 'xlink:href', xlink);
+        if(text) el.appendChild(document.createTextNode(text));
+        if(id) el.id = id;
+        children.forEach(child => el.appendChild(child));
+        return el;
+    }
+}
+;
+
+  var visualizer = new displaCyProcessors({
+      container: "#graph_2",
+      distance: 150,
+      offsetX: 100
+  });
+  var sent = {
+    "endOffsets": [
+        6,
+        13,
+        22,
+        23
+    ],
+    "entities": [
+        "O",
+        "O",
+        "PERSON",
+        "O"
+    ],
+    "graphs": {
+        "stanford-basic": {
+            "edges": [
+                {
+                    "destination": 0,
+                    "relation": "nsubj",
+                    "source": 1
+                },
+                {
+                    "destination": 2,
+                    "relation": "dobj",
+                    "source": 1
+                },
+                {
+                    "destination": 3,
+                    "relation": "punct",
+                    "source": 1
+                }
+            ],
+            "roots": [
+                1
+            ]
+        },
+        "stanford-collapsed": {
+            "edges": [
+                {
+                    "destination": 0,
+                    "relation": "nsubj",
+                    "source": 1
+                },
+                {
+                    "destination": 2,
+                    "relation": "dobj",
+                    "source": 1
+                },
+                {
+                    "destination": 3,
+                    "relation": "punct",
+                    "source": 1
+                }
+            ],
+            "roots": [
+                1
+            ]
+        }
+    },
+    "lemmas": [
+        "Hamlet",
+        "kill",
+        "Claudius",
+        "."
+    ],
+    "startOffsets": [
+        0,
+        7,
+        14,
+        22
+    ],
+    "tags": [
+        "NNP",
+        "VBD",
+        "NNP",
+        "."
+    ],
+    "words": [
+        "Hamlet",
+        "killed",
+        "Claudius",
+        "."
+    ]
+};
+  var graph_name = "stanford-collapsed";
+
+  visualizer.render(sent, graph_name)
+  visualizer.exportSVG()
+</script>
+</body>
+</html>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<html>
+<head>
+  <style>
+    
+  </style>
+</head>
+<body>
+<div id="graph_3">
+</div>
+
+<script type="text/javascript">
+  //- ----------------------------------
+//- DISPLACY PROCESSORS
+//- Based on DisplaCy:
+//- ----------------------------------
+
+
+
+'use strict';
+
+class displaCyProcessors {
+    constructor (options) {
+
+        this.container = document.querySelector(options.container);
+
+        this.$ = document.querySelector.bind(document);
+
+        this.onStart = options.onStart || false;
+        this.onSuccess = options.onSuccess || false;
+        this.onError = options.onError || false;
+
+        this.distance = options.distance || 200;
+        this.offsetX = options.offsetX || 50;
+        this.arrowSpacing = options.arrowSpacing || 20;
+        this.arrowWidth = options.arrowWidth || 10;
+        this.arrowStroke = options.arrowStroke || 2;
+        this.wordSpacing = options.wordSpacing || 75;
+        this.font = options.font || 'inherit';
+        this.color = options.color || '#000000';
+        this.bg = options.bg || '#ffffff';
+    }
+
+    exportSVG() {
+      // http://stackoverflow.com/a/38481556
+      const parseStyles = function(svg) {
+        const styleSheets = [];
+        // get the stylesheets of the document (ownerDocument in case svg is in <iframe> or <object>)
+        const docStyles = svg.ownerDocument.styleSheets;
+
+        // transform the live StyleSheetList to an array to avoid endless loop
+        for (var i = 0; i < docStyles.length; i++) {
+          styleSheets.push(docStyles[i]);
+        }
+
+        if (!styleSheets.length) {
+          return;
+        }
+
+        const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        if (!defs.parentNode) { svg.insertBefore(defs, svg.firstElementChild); }
+        svg.matches = svg.matches || svg.webkitMatchesSelector || svg.mozMatchesSelector || svg.msMatchesSelector || svg.oMatchesSelector;
+
+        // iterate through all document's stylesheets
+        for (var i = 0; i < styleSheets.length; i++) {
+          var currentStyle = styleSheets[i]
+
+          try {
+            var rules = currentStyle.cssRules;
+          } catch (e) {
+            continue;
+          }
+          // create a new style element
+          const style = document.createElement('style');
+          // some stylesheets can't be accessed and will throw a security error
+          const l = rules && rules.length;
+          // iterate through each cssRules of this stylesheet
+          for (var j = 0; j < l; j++) {
+            // get the selector of this cssRules
+            const selector = rules[j].selectorText;
+            // probably an external stylesheet we can't access
+            if (!selector) {
+              continue;
+            }
+
+            // is it our svg node or one of its children ?
+            if ((svg.matches && svg.matches(selector)) || svg.querySelector(selector)) {
+
+              var cssText = rules[j].cssText;
+              // append it to our <style> node
+              style.innerHTML += cssText + '\n';
+            }
+          }
+          // if we got some rules
+          // append the style node to the clone's defs
+          if (style.innerHTML) { defs.appendChild(style); }
+        }
+      }
+
+      var svg = this.$("#" + this.getSVGname())
+      // first create a clone of our svg node so we don't mess the original one
+      var clone = svg.cloneNode(true);
+      // parse the styles
+      parseStyles(clone);
+      // create a doctype
+      var svgDocType = document.implementation.createDocumentType('svg', "-//W3C//DTD SVG 1.1//EN", "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
+      // a fresh svg document
+      var svgDoc = document.implementation.createDocument('http://www.w3.org/2000/svg', 'svg', svgDocType);
+      // replace the documentElement with our clone
+      svgDoc.replaceChild(clone, svgDoc.documentElement);
+      // get the data
+      var svgData = (new XMLSerializer()).serializeToString(svgDoc);
+
+      var a = document.createElement('a');
+      a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
+      a.download = 'graph.svg';
+      a.innerHTML = '<br>save to file';
+      this.container.appendChild(a);
+    }
+
+    handleParsedSentence(sentence, graphName = "stanford-collapsed") {
+        return ({
+          words: sentence.words.map((w, i) => ({
+            text: sentence.words[i],
+            tag: sentence.tags[i],
+            lemma: sentence.lemmas[i],
+            entity: sentence.entities[i]
+            // data: [
+            //   ["lemmas", sentence.lemmas[i]],
+            //   ["entities", sentence.entities[i]]
+            // ]
+          })),
+          // conversions are to ensure edge label is properly rotated
+          arcs: sentence.graphs[graphName].edges.map(({ relation: rel, source: src, destination: dest}, i) => ({
+              label: rel,
+              start: Math.min(dest, src),
+              end: Math.max(dest, src),
+              dir: ((src > dest) ? 'left' : 'right')
+          }))
+        })
+    }
+    getSVGname() {return this.container.id + '-svg'; }
+    render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
+        const parse = this.handleParsedSentence(sentence, graphName = graphName);
+        this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
+        // starting node for most distant dependency
+        // (note that disregard for sign means )
+        this.highestLevel = this.levels.indexOf(this.levels.slice(-1)[0]) + 1;
+        this.offsetY = this.distance / 2 * this.highestLevel;
+
+        const width = this.offsetX + parse.words.length * this.distance;
+        const height = this.offsetY + 3 * this.wordSpacing;
+
+        this.container.innerHTML = '';
+        this.container.appendChild(this._el('svg', {
+            id: this.getSVGname(),
+            classnames: [ 'displacy' ],
+            attributes: [
+                [ 'width', width ],
+                [ 'height', height ],
+                [ 'viewBox', `0 0 ${width} ${height}`],
+                [ 'preserveAspectRatio', 'xMinYMax meet' ],
+                [ 'data-format', this.format ]
+            ],
+            style: [
+                [ 'color', settings.color || this.color ],
+                [ 'background', settings.bg || this.bg ],
+                [ 'fontFamily', settings.font || this.font ]
+            ],
+            children: [
+                ...this.renderWords(parse.words),
+                ...this.renderArrows(parse.arcs)
+            ]
+        }));
+    }
+
+    renderWords(words) {
+        return (words.map(( { text, tag, lemma, entity, data = [] }, i) => this._el('text', {
+            classnames: [ 'displacy-token' ],
+            attributes: [
+                ['fill', 'currentColor'],
+                ['data-tag', text],
+                ['text-anchor', 'middle'],
+                ['y', this.offsetY + this.wordSpacing],
+                ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+            ],
+            children: [
+                this._el('tspan', {
+                    classnames: [ 'displacy-word' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '-1em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', text]
+                    ],
+                    text: text
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-tag' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', tag]
+                    ],
+                    text: tag
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-lemma' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', lemma]
+                    ],
+                    text: lemma
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-entity' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', entity]
+                    ],
+                    text: entity
+                })
+            ]
+        })));
+    }
+
+    renderArrows(arcs) {
+        return arcs.map(({ label, end, start, dir, data = [] }, i) => {
+            const level = this.levels.indexOf(end - start) + 1;
+            const startX = this.offsetX + start * this.distance + this.arrowSpacing * (this.highestLevel - level) / 4;
+            const startY = this.offsetY;
+            const endpoint = this.offsetX + (end - start) * this.distance + start * this.distance - this.arrowSpacing * (this.highestLevel - level) / 4;
+
+            let curve = this.offsetY - level * this.distance / 2;
+            if(curve == 0 && this.levels.length > 5) curve = -this.distance;
+
+            return this._el('g', {
+                id: 'edge-' + i + "-" + this.container.id,
+                classnames: [ 'displacy-arrow' ],
+                attributes: [
+                    [ 'data-dir', dir ],
+                    [ 'data-label', label ],
+                    ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+                ],
+                // NOTE: 'arrow' id must correspond to xlink referenced in 'textPath'
+                // in order to render sequential visualizations correctly in a jupyter notebook (distinct divs aren't enough)
+                children:  [
+                    this._el('path', {
+                        id: 'arrow-' + i + "-" + this.container.id,
+                        classnames: [ 'displacy-arc' ],
+                        attributes: [
+                            [ 'd', `M${startX},${startY} C${startX},${curve} ${endpoint},${curve} ${endpoint},${startY}`],
+                            [ 'stroke-width', this.arrowStroke + 'px' ],
+                            [ 'fill', 'none' ],
+                            [ 'stroke', 'currentColor' ],
+                            [ 'data-dir', dir ],
+                            [ 'data-label', label ]
+                        ]
+                    }),
+
+                    this._el('text', {
+                        attributes: [
+                            [ 'dy', '1em' ]
+                        ],
+                        children: [
+                            this._el('textPath', {
+                                xlink: '#arrow-' + i + "-" + this.container.id,
+                                classnames: [ 'displacy-label' ],
+                                attributes: [
+                                    [ 'startOffset', '50%' ],
+                                    [ 'fill', 'currentColor' ],
+                                    [ 'text-anchor', 'middle' ],
+                                    [ 'data-label', label ],
+                                    [ 'data-dir', dir ]
+                                ],
+                                text: label
+                            })
+                        ]
+                    }),
+
+                    this._el('path', {
+                        classnames: [ 'displacy-arrowhead' ],
+                        attributes: [
+                            [ 'd', `M${(dir == 'left') ? startX : endpoint},${startY + 2} L${(dir == 'left') ? startX - this.arrowWidth + 2 : endpoint + this.arrowWidth - 2},${startY - this.arrowWidth} ${(dir == 'left') ? startX + this.arrowWidth - 2 : endpoint - this.arrowWidth + 2},${startY - this.arrowWidth}` ],
+                            [ 'fill', 'currentColor' ],
+                            [ 'data-label', label ],
+                            [ 'data-dir', dir ]
+                        ]
+                    })
+                ]
+            });
+        });
+    }
+
+    _el(tag, options) {
+        const { classnames = [], attributes = [], style = [], children = [], text, id, xlink } = options;
+        const ns = 'http://www.w3.org/2000/svg';
+        const nsx = 'http://www.w3.org/1999/xlink';
+        const el = document.createElementNS(ns, tag);
+
+        classnames.forEach(name => el.classList.add(name));
+        attributes.forEach(([attr, value]) => el.setAttribute(attr, value));
+        style.forEach(([ prop, value ]) => el.style[prop] = value);
+        if(xlink) el.setAttributeNS(nsx, 'xlink:href', xlink);
+        if(text) el.appendChild(document.createTextNode(text));
+        if(id) el.id = id;
+        children.forEach(child => el.appendChild(child));
+        return el;
+    }
+}
+;
+
+  var visualizer = new displaCyProcessors({
+      container: "#graph_3",
+      distance: 150,
+      offsetX: 100
+  });
+  var sent = {
+    "endOffsets": [
+        36,
+        40,
+        53,
+        58,
+        67,
+        68
+    ],
+    "entities": [
+        "PERSON",
+        "O",
+        "MISC",
+        "O",
+        "O",
+        "O"
+    ],
+    "graphs": {
+        "stanford-basic": {
+            "edges": [
+                {
+                    "destination": 3,
+                    "relation": "auxpass",
+                    "source": 4
+                },
+                {
+                    "destination": 5,
+                    "relation": "punct",
+                    "source": 4
+                },
+                {
+                    "destination": 0,
+                    "relation": "nsubjpass",
+                    "source": 4
+                },
+                {
+                    "destination": 2,
+                    "relation": "conj",
+                    "source": 0
+                },
+                {
+                    "destination": 1,
+                    "relation": "cc",
+                    "source": 0
+                }
+            ],
+            "roots": [
+                4
+            ]
+        },
+        "stanford-collapsed": {
+            "edges": [
+                {
+                    "destination": 2,
+                    "relation": "nsubjpass",
+                    "source": 4
+                },
+                {
+                    "destination": 3,
+                    "relation": "auxpass",
+                    "source": 4
+                },
+                {
+                    "destination": 5,
+                    "relation": "punct",
+                    "source": 4
+                },
+                {
+                    "destination": 0,
+                    "relation": "nsubjpass",
+                    "source": 4
+                },
+                {
+                    "destination": 2,
+                    "relation": "conj_and",
+                    "source": 0
+                }
+            ],
+            "roots": [
+                4
+            ]
+        }
+    },
+    "lemmas": [
+        "Rosencrantz",
+        "and",
+        "Guildenstern",
+        "be",
+        "execute",
+        "."
+    ],
+    "startOffsets": [
+        25,
+        37,
+        41,
+        54,
+        59,
+        67
+    ],
+    "tags": [
+        "NNP",
+        "CC",
+        "NNP",
+        "VBD",
+        "VBN",
+        "."
+    ],
+    "words": [
+        "Rosencrantz",
+        "and",
+        "Guildenstern",
+        "were",
+        "executed",
+        "."
+    ]
+};
+  var graph_name = "stanford-collapsed";
+
+  visualizer.render(sent, graph_name)
+  visualizer.exportSVG()
+</script>
+</body>
+</html>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;example-1&quot;</span>
+<span class="s2">      label: Subject</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        # a disjunction of two exact strings </span>
+<span class="s2">        # denoting either a passive or active subject</span>
+<span class="s2">        [incoming=nsubjpass] | [incoming=nsubj]   </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">rules_v1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Subject</sub>Rosencrantz</span> and Guildenstern were executed .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">Rosencrantz and <span class="mention-span sentence"><sub class="mention-label">Subject</sub>Guildenstern</span> were executed .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Subject</sub>Hamlet</span> killed Claudius .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;example-1&quot;</span>
+<span class="s2">      label: Subject</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        # a regex that will match</span>
+<span class="s2">        # both passive and active subjects</span>
+<span class="s2">        [incoming=/^nsubj/]        </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">rules_v1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Subject</sub>Rosencrantz</span> and Guildenstern were executed .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">Rosencrantz and <span class="mention-span sentence"><sub class="mention-label">Subject</sub>Guildenstern</span> were executed .</span>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence"><span class="mention-span sentence"><sub class="mention-label">Subject</sub>Hamlet</span> killed Claudius .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Case-insensitive-patterns">Case-insensitive patterns<a class="anchor-link" href="#Case-insensitive-patterns">&#182;</a></h2><p>Pattens can be made case insensitive by beginning a regex with <code>/(?i)/</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;HEY YOU GUYS! &quot;&quot;&quot;</span>
+
+<span class="n">example_doc2</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">insensitive_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;insensitive&quot;</span>
+<span class="s2">      label: Example</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        # if we don&#39;t use [],</span>
+<span class="s2">        # Odin assumes the pattern is in terms</span>
+<span class="s2">        # of the token&#39;s word attribute</span>
+<span class="s2">        /(?i)guys/      </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">insensitive_rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">HEY YOU <span class="mention-span sentence"><sub class="mention-label">Example</sub>GUYS</span> !</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Combining-token-constraints">Combining token constraints<a class="anchor-link" href="#Combining-token-constraints">&#182;</a></h2><p>Token constraints can be combined using <code>&amp;</code>.  Imagine if we only want to capture nouns ending in the <strong>tle</strong> in the following sentence:</p>
+<blockquote><p>It's not prattle when I warn a gentle touch is needed with the glass menagerie on the mantle.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;It&#39;s not prattle when I warn a gentle touch is needed with the glass menagerie on the mantle.&quot;&quot;&quot;</span>
+
+<span class="n">example_doc2</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">insensitive_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;combined&quot;</span>
+<span class="s2">      label: Example</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: |</span>
+<span class="s2">        [tag=/^NN/ &amp; word=/tle$/]  </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">example_doc2</span><span class="p">,</span> <span class="n">insensitive_rules</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mentions</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">display_mention</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.sentence {
+   font-family:"Liberation Mono",monospace;
+   color: #3e3f41;
+   font-size: 1em;
+   padding-bottom: 3px;
+ }
+ .mention-label {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: white;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-role {
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: #ff0000;
+   font-weight:bold;
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+ .mention-span {
+   border-radius: 50px;
+   background-color: #ffa64d;
+   -webkit-font-smoothing: subpixel-antialiased;
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-arg {
+   font-weight:bold;
+   background-color:#009933;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 4px;
+   padding-right: 8px;
+ }
+ .mention-trigger {
+   font-weight:bold;
+   background-color:#0066ff;
+   color: white;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+</style><span class="sentence">It 's not prattle when I warn a gentle touch is needed with the glass menagerie on the <span class="mention-span sentence"><sub class="mention-label">Example</sub>mantle</span> .</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge:-identifying-words-containing-a-certain-morpheme">Challenge: identifying words containing a certain morpheme<a class="anchor-link" href="#Challenge:-identifying-words-containing-a-certain-morpheme">&#182;</a></h2><ul>
+<li>Write a rule that identifies nouns containing the derivational suffix <em>er</em> in teach<strong>er</strong>, buy<strong>er</strong>, act<strong>or</strong>, doct<strong>or</strong>, etc., while avoiding the homophonous inflectional morpheme <em>er</em> in calmer, bigger, etc.</li>
+<li>Test it with a few sentences</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">challenge_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">???</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">morpheme_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules: </span>
+<span class="s2">    - name: &quot;er-deriv-suffix&quot;</span>
+<span class="s2">      label: HasDerivSuffix</span>
+<span class="s2">      type: token</span>
+<span class="s2">      pattern: ??? </span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># challenge_doc = API.annotate(challenge_text)</span>
+
+<span class="c1"># mentions = API.odin.extract_from_document(challenge_doc, morpheme_rules)</span>
+<span class="c1"># for m in mentions: viz.display_mention(m)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Negating-token-constraints">Negating token constraints<a class="anchor-link" href="#Negating-token-constraints">&#182;</a></h2><p>Token constraints can be negated by prefacing the attribute name with <code>!</code> (see example below):</p>
+<p><code>[!fieldname=pattern]</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge:-no-verbs!">Challenge: no verbs!<a class="anchor-link" href="#Challenge:-no-verbs!">&#182;</a></h2><p>Using a single token constraint, match all tokens in the following sentence that are not verbs:</p>
+<blockquote><p>If you wish to make an apple pie from scratch, you must first invent the universe.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;If you wish to make an apple pie from scratch, you must first invent the universe.&quot;</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">challenge_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">rules:</span>
+<span class="s2">    - name: &quot;no-verbs&quot;</span>
+<span class="s2">      label: NotVerb</span>
+<span class="s2">      # req. 1: This pattern should involve a single token constraint</span>
+<span class="s2">      # req. 2: The token constraint should use a negated pattern</span>
+<span class="s2">      pattern: | ???</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># mentions = API.odin.extract_from_document(d, challenge_rules)</span>
+<span class="c1"># for m in mentions: print(m)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<html>
+<head>
+  <style>
+    
+  </style>
+</head>
+<body>
+<div id="graph_4">
+</div>
+
+<script type="text/javascript">
+  //- ----------------------------------
+//- DISPLACY PROCESSORS
+//- Based on DisplaCy:
+//- ----------------------------------
+
+
+
+'use strict';
+
+class displaCyProcessors {
+    constructor (options) {
+
+        this.container = document.querySelector(options.container);
+
+        this.$ = document.querySelector.bind(document);
+
+        this.onStart = options.onStart || false;
+        this.onSuccess = options.onSuccess || false;
+        this.onError = options.onError || false;
+
+        this.distance = options.distance || 200;
+        this.offsetX = options.offsetX || 50;
+        this.arrowSpacing = options.arrowSpacing || 20;
+        this.arrowWidth = options.arrowWidth || 10;
+        this.arrowStroke = options.arrowStroke || 2;
+        this.wordSpacing = options.wordSpacing || 75;
+        this.font = options.font || 'inherit';
+        this.color = options.color || '#000000';
+        this.bg = options.bg || '#ffffff';
+    }
+
+    exportSVG() {
+      // http://stackoverflow.com/a/38481556
+      const parseStyles = function(svg) {
+        const styleSheets = [];
+        // get the stylesheets of the document (ownerDocument in case svg is in <iframe> or <object>)
+        const docStyles = svg.ownerDocument.styleSheets;
+
+        // transform the live StyleSheetList to an array to avoid endless loop
+        for (var i = 0; i < docStyles.length; i++) {
+          styleSheets.push(docStyles[i]);
+        }
+
+        if (!styleSheets.length) {
+          return;
+        }
+
+        const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        if (!defs.parentNode) { svg.insertBefore(defs, svg.firstElementChild); }
+        svg.matches = svg.matches || svg.webkitMatchesSelector || svg.mozMatchesSelector || svg.msMatchesSelector || svg.oMatchesSelector;
+
+        // iterate through all document's stylesheets
+        for (var i = 0; i < styleSheets.length; i++) {
+          var currentStyle = styleSheets[i]
+
+          try {
+            var rules = currentStyle.cssRules;
+          } catch (e) {
+            continue;
+          }
+          // create a new style element
+          const style = document.createElement('style');
+          // some stylesheets can't be accessed and will throw a security error
+          const l = rules && rules.length;
+          // iterate through each cssRules of this stylesheet
+          for (var j = 0; j < l; j++) {
+            // get the selector of this cssRules
+            const selector = rules[j].selectorText;
+            // probably an external stylesheet we can't access
+            if (!selector) {
+              continue;
+            }
+
+            // is it our svg node or one of its children ?
+            if ((svg.matches && svg.matches(selector)) || svg.querySelector(selector)) {
+
+              var cssText = rules[j].cssText;
+              // append it to our <style> node
+              style.innerHTML += cssText + '\n';
+            }
+          }
+          // if we got some rules
+          // append the style node to the clone's defs
+          if (style.innerHTML) { defs.appendChild(style); }
+        }
+      }
+
+      var svg = this.$("#" + this.getSVGname())
+      // first create a clone of our svg node so we don't mess the original one
+      var clone = svg.cloneNode(true);
+      // parse the styles
+      parseStyles(clone);
+      // create a doctype
+      var svgDocType = document.implementation.createDocumentType('svg', "-//W3C//DTD SVG 1.1//EN", "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
+      // a fresh svg document
+      var svgDoc = document.implementation.createDocument('http://www.w3.org/2000/svg', 'svg', svgDocType);
+      // replace the documentElement with our clone
+      svgDoc.replaceChild(clone, svgDoc.documentElement);
+      // get the data
+      var svgData = (new XMLSerializer()).serializeToString(svgDoc);
+
+      var a = document.createElement('a');
+      a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
+      a.download = 'graph.svg';
+      a.innerHTML = '<br>save to file';
+      this.container.appendChild(a);
+    }
+
+    handleParsedSentence(sentence, graphName = "stanford-collapsed") {
+        return ({
+          words: sentence.words.map((w, i) => ({
+            text: sentence.words[i],
+            tag: sentence.tags[i],
+            lemma: sentence.lemmas[i],
+            entity: sentence.entities[i]
+            // data: [
+            //   ["lemmas", sentence.lemmas[i]],
+            //   ["entities", sentence.entities[i]]
+            // ]
+          })),
+          // conversions are to ensure edge label is properly rotated
+          arcs: sentence.graphs[graphName].edges.map(({ relation: rel, source: src, destination: dest}, i) => ({
+              label: rel,
+              start: Math.min(dest, src),
+              end: Math.max(dest, src),
+              dir: ((src > dest) ? 'left' : 'right')
+          }))
+        })
+    }
+    getSVGname() {return this.container.id + '-svg'; }
+    render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
+        const parse = this.handleParsedSentence(sentence, graphName = graphName);
+        this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
+        // starting node for most distant dependency
+        // (note that disregard for sign means )
+        this.highestLevel = this.levels.indexOf(this.levels.slice(-1)[0]) + 1;
+        this.offsetY = this.distance / 2 * this.highestLevel;
+
+        const width = this.offsetX + parse.words.length * this.distance;
+        const height = this.offsetY + 3 * this.wordSpacing;
+
+        this.container.innerHTML = '';
+        this.container.appendChild(this._el('svg', {
+            id: this.getSVGname(),
+            classnames: [ 'displacy' ],
+            attributes: [
+                [ 'width', width ],
+                [ 'height', height ],
+                [ 'viewBox', `0 0 ${width} ${height}`],
+                [ 'preserveAspectRatio', 'xMinYMax meet' ],
+                [ 'data-format', this.format ]
+            ],
+            style: [
+                [ 'color', settings.color || this.color ],
+                [ 'background', settings.bg || this.bg ],
+                [ 'fontFamily', settings.font || this.font ]
+            ],
+            children: [
+                ...this.renderWords(parse.words),
+                ...this.renderArrows(parse.arcs)
+            ]
+        }));
+    }
+
+    renderWords(words) {
+        return (words.map(( { text, tag, lemma, entity, data = [] }, i) => this._el('text', {
+            classnames: [ 'displacy-token' ],
+            attributes: [
+                ['fill', 'currentColor'],
+                ['data-tag', text],
+                ['text-anchor', 'middle'],
+                ['y', this.offsetY + this.wordSpacing],
+                ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+            ],
+            children: [
+                this._el('tspan', {
+                    classnames: [ 'displacy-word' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '-1em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', text]
+                    ],
+                    text: text
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-tag' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', tag]
+                    ],
+                    text: tag
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-lemma' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', lemma]
+                    ],
+                    text: lemma
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-entity' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', entity]
+                    ],
+                    text: entity
+                })
+            ]
+        })));
+    }
+
+    renderArrows(arcs) {
+        return arcs.map(({ label, end, start, dir, data = [] }, i) => {
+            const level = this.levels.indexOf(end - start) + 1;
+            const startX = this.offsetX + start * this.distance + this.arrowSpacing * (this.highestLevel - level) / 4;
+            const startY = this.offsetY;
+            const endpoint = this.offsetX + (end - start) * this.distance + start * this.distance - this.arrowSpacing * (this.highestLevel - level) / 4;
+
+            let curve = this.offsetY - level * this.distance / 2;
+            if(curve == 0 && this.levels.length > 5) curve = -this.distance;
+
+            return this._el('g', {
+                id: 'edge-' + i + "-" + this.container.id,
+                classnames: [ 'displacy-arrow' ],
+                attributes: [
+                    [ 'data-dir', dir ],
+                    [ 'data-label', label ],
+                    ...data.map(([attr, value]) => (['data-' + attr.replace(' ', '-'), value]))
+                ],
+                // NOTE: 'arrow' id must correspond to xlink referenced in 'textPath'
+                // in order to render sequential visualizations correctly in a jupyter notebook (distinct divs aren't enough)
+                children:  [
+                    this._el('path', {
+                        id: 'arrow-' + i + "-" + this.container.id,
+                        classnames: [ 'displacy-arc' ],
+                        attributes: [
+                            [ 'd', `M${startX},${startY} C${startX},${curve} ${endpoint},${curve} ${endpoint},${startY}`],
+                            [ 'stroke-width', this.arrowStroke + 'px' ],
+                            [ 'fill', 'none' ],
+                            [ 'stroke', 'currentColor' ],
+                            [ 'data-dir', dir ],
+                            [ 'data-label', label ]
+                        ]
+                    }),
+
+                    this._el('text', {
+                        attributes: [
+                            [ 'dy', '1em' ]
+                        ],
+                        children: [
+                            this._el('textPath', {
+                                xlink: '#arrow-' + i + "-" + this.container.id,
+                                classnames: [ 'displacy-label' ],
+                                attributes: [
+                                    [ 'startOffset', '50%' ],
+                                    [ 'fill', 'currentColor' ],
+                                    [ 'text-anchor', 'middle' ],
+                                    [ 'data-label', label ],
+                                    [ 'data-dir', dir ]
+                                ],
+                                text: label
+                            })
+                        ]
+                    }),
+
+                    this._el('path', {
+                        classnames: [ 'displacy-arrowhead' ],
+                        attributes: [
+                            [ 'd', `M${(dir == 'left') ? startX : endpoint},${startY + 2} L${(dir == 'left') ? startX - this.arrowWidth + 2 : endpoint + this.arrowWidth - 2},${startY - this.arrowWidth} ${(dir == 'left') ? startX + this.arrowWidth - 2 : endpoint - this.arrowWidth + 2},${startY - this.arrowWidth}` ],
+                            [ 'fill', 'currentColor' ],
+                            [ 'data-label', label ],
+                            [ 'data-dir', dir ]
+                        ]
+                    })
+                ]
+            });
+        });
+    }
+
+    _el(tag, options) {
+        const { classnames = [], attributes = [], style = [], children = [], text, id, xlink } = options;
+        const ns = 'http://www.w3.org/2000/svg';
+        const nsx = 'http://www.w3.org/1999/xlink';
+        const el = document.createElementNS(ns, tag);
+
+        classnames.forEach(name => el.classList.add(name));
+        attributes.forEach(([attr, value]) => el.setAttribute(attr, value));
+        style.forEach(([ prop, value ]) => el.style[prop] = value);
+        if(xlink) el.setAttributeNS(nsx, 'xlink:href', xlink);
+        if(text) el.appendChild(document.createTextNode(text));
+        if(id) el.id = id;
+        children.forEach(child => el.appendChild(child));
+        return el;
+    }
+}
+;
+
+  var visualizer = new displaCyProcessors({
+      container: "#graph_4",
       distance: 148,
       offsetX: 100
   });
@@ -13295,8 +17513,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13314,8 +17531,7 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13369,12 +17585,11 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Lookarounds-and-other-zero-width-assertions">Lookarounds and other zero-width assertions<a class="anchor-link" href="#Lookarounds-and-other-zero-width-assertions">&#182;</a></h2><p>TODO</p>
+<h2 id="Lookarounds-and-other-zero-width-assertions">Lookarounds and other zero-width assertions<a class="anchor-link" href="#Lookarounds-and-other-zero-width-assertions">&#182;</a></h2><p>Odin supports lookaround assertions, as well as start/end sentence anchors.  You can use lookarounds to specify contextual constraints that you don't want to end up in your result (ex. "only match B if it's preceded by A").</p>
 <table>
 <thead><tr>
 <th>Symbol</th>
@@ -13426,18 +17641,19 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Refining-rules:-an-example">Refining rules: an example<a class="anchor-link" href="#Refining-rules:-an-example">&#182;</a></h1>
+<h1 id="Refining-rules:-an-example">Refining rules: an example<a class="anchor-link" href="#Refining-rules:-an-example">&#182;</a></h1><p>Rule writing can be an incremental process or refinement.  Sometimes it's a matter of adding conjunctions to further constrain a match, or disjunctions to relax it.  Other times, as demonstrated below, it comes down to picking the appropriate representation/attribute for a token...</p>
+<p>The naive rule below is trying label Person mentions as any sequence of proper nouns.  As you can see, this is too general.  You can probably think of other spurious stuff that this would match, right?</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">entity_rule_v1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -13458,7 +17674,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">example_doc</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">entity_rule_v1</span><span class="p">)</span>
@@ -13474,7 +17690,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13532,7 +17750,9 @@ class displaCyProcessors {
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13590,7 +17810,9 @@ class displaCyProcessors {
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13651,9 +17873,18 @@ class displaCyProcessors {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see if we can do better.  It turns out we're lucky, as the model used by the named entity recognizer (NER) built into to our NLP pipeline has been trained to detect that label.  Let's take a look...</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">entity_rule_v2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -13674,7 +17905,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">example_doc</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">entity_rule_v2</span><span class="p">)</span>
@@ -13690,7 +17921,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13748,7 +17981,9 @@ class displaCyProcessors {
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13809,8 +18044,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13818,8 +18052,7 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13828,8 +18061,7 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13837,29 +18069,28 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>TODO</p>
+<p>See <a href="https://arxiv.org/pdf/1509.07513.pdf#page=10">the relevant section</a> in the manual</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Capturing-events-and-relations-with-dependency-patterns">Capturing events and relations with dependency patterns<a class="anchor-link" href="#Capturing-events-and-relations-with-dependency-patterns">&#182;</a></h2><p>TODO</p>
+<h2 id="Capturing-events-and-relations-with-dependency-patterns">Capturing events and relations with dependency patterns<a class="anchor-link" href="#Capturing-events-and-relations-with-dependency-patterns">&#182;</a></h2><p>See <a href="https://arxiv.org/pdf/1509.07513.pdf#page=13">the relevant section</a> in the manual</p>
+<p>For a description of dependency relations used by default in Odin, see the collapsed dependency described in <a href="https://nlp.stanford.edu/software/dependencies_manual.pdf">https://nlp.stanford.edu/software/dependencies_manual.pdf</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -13885,7 +18116,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">example_doc</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">rules_v1</span><span class="p">)</span>
@@ -13903,7 +18134,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -13961,7 +18194,9 @@ class displaCyProcessors {
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -14022,8 +18257,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14032,8 +18266,7 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14044,7 +18277,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -14070,7 +18303,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mentions</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">odin</span><span class="o">.</span><span class="n">extract_from_document</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">example_doc</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">rules_v2</span><span class="p">)</span>
@@ -14088,7 +18321,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -14149,8 +18384,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14161,7 +18395,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules_v3</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -14194,7 +18428,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -14255,8 +18491,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14270,14 +18505,13 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;In a parallel universe, Marge married Homer, Ned Flanders, and Troy McClure.&quot;</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">parse_css</span><span class="p">)</span>
 <span class="n">viz</span><span class="o">.</span><span class="n">display_graph</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">css</span><span class="o">=</span><span class="n">viz</span><span class="o">.</span><span class="n">parse_css</span><span class="p">)</span>
 
 <span class="n">challenge_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -14306,53 +18540,39 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>.displacy-tag[data-tag^=&#34;NN&#34;]{
-  color: green;
-  font-weight: bold;
-}
-
-.displacy-tag[data-tag^=&#34;VB&#34;]{
-  color: blue;
-  font-weight: bold;
-}
-
-.displacy-entity:not([data-tag=&#34;O&#34;]){
-  font-weight: bold;
-}
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-<div class="prompt"></div>
 
 
 <div class="output_html rendered_html output_subarea ">
 <html>
 <head>
   <style>
-    #graph_2 .displacy-tag[data-tag^="NN"]{
+    #graph_5 .displacy-tag[data-tag^="NN"]{
   color: green;
   font-weight: bold;
 }
 
-#graph_2 .displacy-tag[data-tag^="VB"]{
+#graph_5 .displacy-tag[data-tag^="VB"]{
   color: blue;
   font-weight: bold;
 }
 
-#graph_2 .displacy-entity:not([data-tag="O"]){
+#graph_5 .displacy-entity:not([data-tag="O"]){
+  color: green;
+  font-weight: bold;
+}
+
+#graph_5 .displacy-arrow[data-label^="nsubj"], [data-label^="dobj"], [data-label^="prep_of"], [data-label^="nn"]{
+  color: green;
   font-weight: bold;
 }
 
   </style>
 </head>
 <body>
-<div id="graph_2">
+<div id="graph_5">
 </div>
 
 <script type="text/javascript">
@@ -14662,7 +18882,7 @@ class displaCyProcessors {
 ;
 
   var visualizer = new displaCyProcessors({
-      container: "#graph_2",
+      container: "#graph_5",
       distance: 141,
       offsetX: 100
   });
@@ -14958,8 +19178,7 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14970,7 +19189,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Gonzo and Camilla were married in October.  Barack and Michelle were married in Chicago.&quot;</span>
@@ -15012,7 +19231,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -15073,53 +19294,35 @@ class displaCyProcessors {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Quantifiers-in-graph-traversals">Quantifiers in graph traversals<a class="anchor-link" href="#Quantifiers-in-graph-traversals">&#182;</a></h2><p>TODO</p>
+<h2 id="Quantifiers-in-graph-traversals">Quantifiers in graph traversals<a class="anchor-link" href="#Quantifiers-in-graph-traversals">&#182;</a></h2><p>See <a href="https://arxiv.org/pdf/1509.07513.pdf#page=17">the relevant section</a> in the manual</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Variables-and-rule-templates">Variables and rule templates<a class="anchor-link" href="#Variables-and-rule-templates">&#182;</a></h1><p>TODO</p>
-<p>Write a couple of events that rely on the same predicate.</p>
-<p>Use gist urls for rule sets with vars</p>
+<h1 id="Variables-and-rule-templates">Variables and rule templates<a class="anchor-link" href="#Variables-and-rule-templates">&#182;</a></h1><p>It can be tedious to write sets of rules by hands.  Often you'll see that components of rules can or should be reused in subsets of your grammar. Odin supports the use of variables and templates to address just this.   Variables and templates help to maintain large grammars and create rule sets that can be "recycled" or applied to related problems with a few tweaks.</p>
+<p>For more details, see <a href="https://arxiv.org/pdf/1509.07513.pdf#page=20">the relevant section</a> in the manual</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>File imports are also possible in Odin, but currently for that you'll need to go beyond <code>py-processors</code>.  For more complex cases of template using involving multiple files, see the <a href="https://github.com/clulab/odin-examples">odin examples</a> sbt project or <a href="https://github.com/clulab/reach/blob/ccf0ee87c559e7d404b9cad277cea2536689ee8d/main/src/main/resources/org/clulab/reach/biogrammar/events_master.yml">Reach</a>.</p>
+<p>Templates work via file imports.  For more complex cases of template using involving multiple files, see the <a href="https://github.com/clulab/odin-examples">odin examples</a> sbt project or <a href="https://github.com/clulab/reach/blob/ccf0ee87c559e7d404b9cad277cea2536689ee8d/main/src/main/resources/org/clulab/reach/biogrammar/events_master.yml">Reach</a>.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15127,29 +19330,26 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>TODO</p>
+<p>See <a href="https://arxiv.org/pdf/1509.07513.pdf#page=19">the relevant section</a> in the manual</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Priorities-for-rules">Priorities for rules<a class="anchor-link" href="#Priorities-for-rules">&#182;</a></h1><p>The <code>priority</code> field allows you to specify when a rule should be applied.  By default, a rule will continue to be executed until no rule has produced a new match.  This means that you usually don't need to worry about setting the priority, but the power is there if you need it.</p>
+<h1 id="Priorities-for-rules">Priorities for rules<a class="anchor-link" href="#Priorities-for-rules">&#182;</a></h1><p>Rules are applied iteratively (pass 1, pass 2, .., pass <em>n</em>). If you want to control when a rule should be applied, specify a value for the rule field <code>priority</code>.  The value can be an open or closed range, exact value, or list of comma separated values.  By default, a rule will continue to be executed until no rule has produced a new match (<code>priority: 1+</code>).  This default means that you usually don't need to worry about setting the priority, but the power is there if you need it.</p>
 <p>Note that <a href="#Quantifiers">quantifiers</a> can be applied to priorities.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15158,8 +19358,7 @@ class displaCyProcessors {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15172,7 +19371,7 @@ class displaCyProcessors {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -15195,7 +19394,9 @@ class displaCyProcessors {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: rule &#39;person&#39; has no labels
@@ -15214,8 +19415,7 @@ rules:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15226,11 +19426,12 @@ rules:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">rules: </span>
+<span class="s2">    # we&#39;ve mispelled &quot;name&quot;</span>
 <span class="s2">    - nme: &quot;person&quot;</span>
 <span class="s2">      label: Person</span>
 <span class="s2">      type: token</span>
@@ -15250,12 +19451,15 @@ rules:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: unnamed rule
 
 rules: 
+    # we&#39;ve mispelled &#34;name&#34;
     - nme: &#34;person&#34;
       label: Person
       type: token
@@ -15270,8 +19474,7 @@ rules:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15283,13 +19486,14 @@ rules:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">rules: </span>
 <span class="s2">    - name: &quot;person&quot;</span>
 <span class="s2">      label: Person</span>
+<span class="s2">      # we&#39;ve mispelled &quot;token&quot;</span>
 <span class="s2">      type: tken</span>
 <span class="s2">      pattern: |</span>
 <span class="s2">        [entity=PERSON]+</span>
@@ -15307,7 +19511,9 @@ rules:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: type &#39;tken&#39; not recognized for rule &#39;person&#39;
@@ -15315,6 +19521,7 @@ rules:
 rules: 
     - name: &#34;person&#34;
       label: Person
+      # we&#39;ve mispelled &#34;token&#34;
       type: tken
       pattern: |
         [entity=PERSON]+
@@ -15327,8 +19534,7 @@ rules:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15340,7 +19546,7 @@ rules:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -15364,7 +19570,9 @@ rules:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: Error parsing rule &#39;person&#39;: unrecognized token field
@@ -15384,8 +19592,7 @@ rules:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15395,7 +19602,7 @@ rules:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -15419,7 +19626,9 @@ rules:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: while parsing a block mapping
@@ -15447,8 +19656,7 @@ rules:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15459,8 +19667,7 @@ rules:
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15471,7 +19678,7 @@ rules:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_rules</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -15501,7 +19708,9 @@ rules:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="ansi-red-intense-fg ansi-bold">OdinError</span>: rule name &#39;person&#39; is not unique
@@ -15523,6 +19732,28 @@ rules:
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Ok,-I've-had-enough.--Give-me-my-memory-back,-you-animal!">Ok, I've had enough.  Give me my memory back, you animal!<a class="anchor-link" href="#Ok,-I've-had-enough.--Give-me-my-memory-back,-you-animal!">&#182;</a></h1><p>Run the line below to shut down the NLP server.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#API.stop_server()</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
