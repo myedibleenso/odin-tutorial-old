@@ -1,0 +1,58 @@
+taxonomy:
+  - Entity:
+    - Protein:
+      - Mutant
+  - Event:
+    # Events capture post-translational modifications (PTMs)
+    - PTMEvent:
+      - Phosphorylation
+      - Ubiquitination
+    # events that take other events as arguments
+    - ComplexEvent:
+      - Regulation:
+        - PositiveRegulation
+        - NegativeRegulation
+      - Activation:
+        - PositiveActivation
+        - NegativeActivation
+
+vars:
+  # priorities for entities and events
+  simpleEventPriority: 2
+  complexEventPriority: 3+
+  prefix: file:/Users/gus/repos/odin-tutorial
+
+rules:
+
+  # Entities
+  - import: ${prefix}/domains/molecular-biology/grammar/entities.yml
+    vars:
+      priority: 1
+
+  # Phosphorylation
+  - import: ${prefix}/domains/molecular-biology/grammar/ptm_events.yml
+    vars:
+      priority: ${simpleEventPriority}
+      triggerStem: "/(?i)^phosphorylat/"
+      eventLabel: "Phosphorylation"
+
+  # Ubiquitination
+  - import: ${prefix}/domains/molecular-biology/grammar/ptm_events.yml
+    vars:
+      priority: ${simpleEventPriority}
+      triggerStem: "/(?i)^ubiquitinat/"
+      eventLabel: "Ubiquitination"
+
+  # Positive Regulations
+  - import: ${prefix}/domains/molecular-biology/grammar/complex_events.yml
+    vars:
+      priority: ${complexEventPriority}
+      triggerStem: "/(?i)^(inhibit|reduc|downreg)/"
+      eventLabel: "PositiveRegulation"
+
+  # Negative Regulations
+  - import: ${prefix}/domains/molecular-biology/grammar/complex_events.yml
+    vars:
+      priority: ${complexEventPriority}
+      triggerStem: "/(?i)^(promot|increas|potentiat)/"
+      eventLabel: "NegativeRegulation"

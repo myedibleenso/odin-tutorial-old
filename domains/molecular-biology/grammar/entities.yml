@@ -1,0 +1,6 @@
+- name: "protein-1"
+  priority: ${priority}
+  label: Protein
+  type: token
+  pattern: |
+    [entity="B-Gene_or_gene_product"] [entity="I-Gene_or_gene_product"]* [lemma=mutant]?

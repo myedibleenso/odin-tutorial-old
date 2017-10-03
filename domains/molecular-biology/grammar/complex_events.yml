@@ -1,0 +1,17 @@
+# ComplexEvent rules
+
+- name: "${eventLabel}-nominal-1"
+  priority: ${priority}
+  label: ${eventLabel}
+  pattern: |
+    trigger = [lemma=${triggerStem} & tag=/^N/]
+    patient:PTMEvent = >prep_of
+    agent:Entity = >nn
+
+- name: "${eventLabel}-verbal-1"
+  priority: ${priority}
+  label: ${eventLabel}
+  pattern: |
+    trigger = [lemma=${triggerStem} & tag=/^V/]
+    patient:PTMEvent = dobj
+    agent:Entity = >nsubj

@@ -1,0 +1,20 @@
+taxonomy:
+  - Entity:
+    - Quantity
+    - Percentage
+    - SoilComponent
+    - Crop
+    - Treatment:
+      - Nitrogen
+  - Event:
+    - TreatmentApplication
+    - SoilComposition
+
+vars:
+    soilType: "sand|silt|clay|peat|loam"
+    prefix: file:/Users/gus/repos/odin-tutorial
+
+rules:
+  - import: ${prefix}/domains/agro/grammar/entities.yml
+
+  - import: ${prefix}/domains/agro/grammar/events.yml

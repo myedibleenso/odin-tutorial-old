@@ -1,0 +1,15 @@
+# Event rules for post-translational modifications
+
+- name: "${eventLabel}-nominal-1"
+  priority: ${priority}
+  label: ${eventLabel}
+  pattern: |
+    trigger = [lemma=${triggerStem} & tag=/^N/]
+    patient:Entity = prep_of
+
+- name: "${eventLabel}-verbal-1"
+  priority: ${priority}
+  label: ${eventLabel}
+  pattern: |
+    trigger = [lemma=${triggerStem} & tag=/^V/]
+    patient:Entity = >nsubj

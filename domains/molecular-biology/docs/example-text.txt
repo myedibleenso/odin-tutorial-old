@@ -1,0 +1,1 @@
+The CYLD mutant inhibits the ubiquitination of both TRAF2 and TRAF6.

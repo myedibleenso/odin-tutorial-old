@@ -1,0 +1,24 @@
+
+#
+# treatment was applied
+#
+- name: treatment-applied-passive
+  priority: 10
+  label: TreatmentApplication
+  pattern: |
+    trigger = [lemma=/apply|perform/ & tag=/^V/]
+    treatment:Treatment = nsubjpass
+    quantity:Quantity = prep_at|prep_followed_by
+
+#
+# soil composition
+#
+- name: soil-composition-surface
+  priority: 10
+  label: SoilComposition
+  type: token
+  pattern: |
+    (?<soil> [tag = "NNP"]* @SoilComponent)
+    "-LRB-"
+    (","? (?<component> @Percentage @SoilComponent))+
+    "-RRB-"
